@@ -20,6 +20,7 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: "./src/index.html",
+      favicon: "./static/favicon.ico",
     }),
   ],
   devtool: process.env.NODE_ENV === "development" ? "inline-source-map" : false,
