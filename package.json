@@ -23,7 +23,9 @@
   "homepage": "https://github.com/YanaTrifonova/bowling#readme",
   "dependencies": {
     "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "react-dom": "^17.0.2",
+    "semantic-ui-css": "^2.4.1",
+    "semantic-ui-react": "^2.0.3"
   },
   "devDependencies": {
     "@babel/core": "^7.15.5",
