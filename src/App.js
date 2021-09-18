@@ -1,12 +1,14 @@
 import React from 'react';
+import {Provider} from 'react-redux';
 import Header from './Components/Header/index.jsx';
-import Players from './Components/Players';
+import store from "./store";
+import Main from "./Components/Main";
 
 export default function App() {
   return (
-    <div>
-      <Header />
-      <Players />
-    </div>
+    <Provider store={store}>
+      <Header/>
+      <Main/>
+    </Provider>
   );
 }
