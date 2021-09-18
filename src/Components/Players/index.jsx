@@ -4,7 +4,6 @@ import {
   ButtonGroup,
   FormHelperText,
   InputLabel,
-  Paper,
   Table,
   TableBody,
   TableCell,
@@ -13,8 +12,9 @@ import {
   TableRow,
   TextField,
 } from '@material-ui/core';
+import PropTypes from "prop-types";
 
-export default function Players() {
+export default function Players({handleNewGame}) {
   const [name, setName] = useState("")
   const [players, setPlayers] = useState(["default"]);
   const [error, setError] = useState(false);
@@ -28,6 +28,10 @@ export default function Players() {
     } else {
       setError(true);
     }
+  }
+
+  function startNewGameClicked() {
+    handleNewGame(players);
   }
 
   return (
@@ -44,7 +48,7 @@ export default function Players() {
         <Button type="submit" disabled={name.length === 0} size="small" variant="outlined">Add a player</Button>
       </form>
       {players.length > 0 && (
-        <TableContainer component={Paper}>
+        <TableContainer >
           <Table size="small" aria-label="a table with all players">
             <TableHead>
               <TableRow>
@@ -76,10 +80,14 @@ export default function Players() {
       )}
       {players.length > 0 && (
         <ButtonGroup>
-          <Button>Start a new game</Button>
+          <Button onClick={startNewGameClicked}>Start a new game</Button>
           <Button>Reset all games</Button>
         </ButtonGroup>
       )}
     </>
   );
+}
+
+Players.propTypes = {
+  handleNewGame: PropTypes.func,
 }
