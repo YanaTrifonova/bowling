@@ -1,16 +1,16 @@
-const HtmlWebpackPlugin = require("html-webpack-plugin");
-const path = require("path");
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const path = require('path');
 
 module.exports = {
   output: {
-    filename: "[name].[hash].js",
-    path: path.resolve(__dirname, "dist"),
+    filename: '[name].[hash].js',
+    path: path.resolve(__dirname, 'dist'),
   },
   resolve: {
-    modules: [path.join(__dirname, "src"), "node_modules"],
+    modules: [path.join(__dirname, 'src'), 'node_modules'],
     alias: {
-      react: path.join(__dirname, "node_modules", "react"),
-    }
+      react: path.join(__dirname, 'node_modules', 'react'),
+    },
   },
   optimization: {
     removeAvailableModules: false,
@@ -19,27 +19,25 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: "./src/index.html",
-      favicon: "./static/favicon.ico",
+      template: './src/index.html',
+      favicon: './static/favicon.ico',
     }),
   ],
-  devtool: process.env.NODE_ENV === "development" ? "inline-source-map" : false,
+  devtool: process.env.NODE_ENV === 'development' ? 'inline-source-map' : false,
   module: {
     rules: [
       {
         test: /\.jsx?$/,
         exclude: /node_modules/,
-        use: {
-          loader: "babel-loader",
-        },
+        use: ['babel-loader', 'eslint-loader'],
       },
       {
         test: /\.css$/,
-        use: ["style-loader", "css-loader"],
+        use: ['style-loader', 'css-loader'],
       },
       {
         test: /\.png|svg|jpg|gif$/,
-        use: ["file-loader"],
+        use: ['file-loader'],
       },
     ],
   },
@@ -52,5 +50,5 @@ module.exports = {
     client: {
       logging: 'info',
     },
-  }
+  },
 };
