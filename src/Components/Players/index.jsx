@@ -13,11 +13,14 @@ import {
   TextField,
 } from '@material-ui/core';
 import PropTypes from "prop-types";
+import {useDispatch} from "react-redux";
+import {resetAllGames} from "../../store/GameState/actions";
 
 export default function Players({handleNewGame}) {
   const [name, setName] = useState("")
   const [players, setPlayers] = useState(["default"]);
   const [error, setError] = useState(false);
+  const dispatch = useDispatch();
 
   function addPlayer(event, newPlayer) {
     event.preventDefault();
@@ -32,6 +35,10 @@ export default function Players({handleNewGame}) {
 
   function startNewGameClicked() {
     handleNewGame(players);
+  }
+
+  function resetAllGamesClicked() {
+    dispatch(resetAllGames());
   }
 
   return (
@@ -81,7 +88,7 @@ export default function Players({handleNewGame}) {
       {players.length > 0 && (
         <ButtonGroup>
           <Button onClick={startNewGameClicked}>Start a new game</Button>
-          <Button>Reset all games</Button>
+          <Button onClick={resetAllGamesClicked}>Reset all games</Button>
         </ButtonGroup>
       )}
     </>

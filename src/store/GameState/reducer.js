@@ -1,4 +1,4 @@
-import {CREATE_NEW_GAME} from "./actions";
+import {CREATE_NEW_GAME, RESET_ALL_GAMES} from "./actions";
 
 const initialState = {
   games: []
@@ -15,6 +15,10 @@ export default function (state = initialState, action) {
         }, 1)}), {})
 
       return {...state, games : [ game, ...state.games]}
+    }
+
+    case RESET_ALL_GAMES: {
+      return initialState;
     }
 
     default:
