@@ -41,6 +41,16 @@ export default function Players({handleNewGame}) {
     dispatch(resetAllGames());
   }
 
+  function onPlayerDelete(player) {
+    const index = players.indexOf(player);
+
+    if (index !== -1) {
+      const newPlayers = [...players];
+      newPlayers.splice(index, 1);
+      setPlayers(newPlayers);
+    }
+  }
+
   return (
     <>
       <form onSubmit={(event) => addPlayer(event, name)}>
@@ -55,7 +65,7 @@ export default function Players({handleNewGame}) {
         <Button type="submit" disabled={name.length === 0} size="small" variant="outlined">Add a player</Button>
       </form>
       {players.length > 0 && (
-        <TableContainer >
+        <TableContainer>
           <Table size="small" aria-label="a table with all players">
             <TableHead>
               <TableRow>
@@ -78,7 +88,9 @@ export default function Players({handleNewGame}) {
                   <TableCell align="center">{player}</TableCell>
                   <TableCell align="center">1</TableCell>
                   <TableCell align="center">1</TableCell>
-                  <TableCell align="center"><Button>delete</Button></TableCell>
+                  <TableCell align="center">
+                    <Button onClick={() => onPlayerDelete(player)}>Delete</Button>
+                  </TableCell>
                 </TableRow>
               ))}
             </TableBody>
