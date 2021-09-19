@@ -1,82 +1,42 @@
-//{
-//  "parser": "babel-eslint",
-//  "extends": ["airbnb",  "plugin:import/react"],
-//  "env": {
-//    "browser": true,
-//    "node": true
-//  },
-//  "settings": {
-//    "import/resolver": {
-//      "node": {
-//        "extensions": [".js",".jsx"]
-//      }
-//    }
-//  },
-//  "plugins": [
-//    "react",
-//    "jsx-a11y",
-//    "import"
-//  ],
-//  "rules": {
-//    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"]}],
-//    "import/extensions": "off",
-//    "no-console": "off"
-//  },
-//}
-
 {
-  // Specifies the ESLint parser
   "parser": "babel-eslint",
-
   "parserOptions": {
-    // Allows for the parsing of modern ECMAScript features
     "ecmaVersion": 2020,
-    // Allows for the use of imports
     "sourceType": "module",
-    // Allows for the parsing of JSX
     "ecmaFeatures": {
       "jsx": true
     }
   },
   "globals": {
-    "Atomics": "readonly",
-    "SharedArrayBuffer": "readonly",
-    "document": true,
-    "window": true,
-    "$": true,
-    "VERSION": true,
-    "DEV": true,
-    "fetch": false
+    "document": true
   },
-  // Specify environments
   "env": {
     "es6": true,
     "browser": true,
-    "amd": true,
     "node": true,
     "jest": true
   },
   "settings": {
     "react": {
-      // Tells eslint-plugin-react to automatically detect the version of React to use
       "version": "detect"
     }
   },
   "extends": [
-    // Uses the recommended rules from @eslint-plugin-react
     "plugin:react/recommended",
-    //  Recommended hooks rules
     "plugin:react-hooks/recommended"
   ],
   "rules": {
     "react/prop-types": "warn",
-    "react/no-unescaped-entities": "off",
+    "react/no-unescaped-entities": "warn",
     "react/display-name": "warn",
-    "react-hooks/exhaustive-deps": "off",
+    "react-hooks/exhaustive-deps": "warn",
     "no-restricted-imports": [
       "error",
       {
-        "patterns": ["@material-ui/*/*/*", "!@material-ui/core/test-utils/*"]
+        "patterns": [
+          "@material-ui/*/*/*",
+          "!@material-ui/core/test-utils/*"
+        ]
       }
     ]
   }
