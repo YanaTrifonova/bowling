@@ -17,7 +17,7 @@ export default function Main() {
     <>
       <Players handleNewGame={handleNewGame}/>
       {/*{createdPlayers.length > 0 && (<Games players={createdPlayers}/>)}*/}
-      <Games players={createdPlayers}/>
+      <Games />
     </>
   );
 }
