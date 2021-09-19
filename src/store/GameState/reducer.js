@@ -7,20 +7,14 @@ const initialState = {
 export default function (state = initialState, action) {
   switch (action.type) {
     case CREATE_NEW_GAME : {
-      const game = action.payload.map((player) => {
-        return (
-          {
-            [player]: Array(10).fill({
-              score: [],
-              isStrike: false,
-              isSpare: false,
-              addScoreTo: []
-            }, 1)
-          }
-        )
-      });
+      const game = action.payload.reduce((a,v) => ({...a, [v] : Array(11).fill({
+          scores: null,
+          isStrike: false,
+          isSpare: false,
+          addScoresTo: [],
+        }, 1)}), {})
 
-      return {...state, games : [{game: game}, ...state.games]}
+      return {...state, games : [ game, ...state.games]}
     }
 
     default:
