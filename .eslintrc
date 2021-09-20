@@ -25,6 +25,7 @@
     "plugin:react/recommended",
     "plugin:react-hooks/recommended"
   ],
+  "ignorePatterns": ["dist/**", "coverage/**"],
   "rules": {
     "react/prop-types": "warn",
     "react/no-unescaped-entities": "warn",
