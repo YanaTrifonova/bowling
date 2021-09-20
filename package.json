@@ -7,7 +7,7 @@
     "start": "NODE_ENV=development webpack serve",
     "build": "NODE_ENV=production webpack --config webpack.config.js",
     "eslint": "eslint --fix --ext .js,.jsx .",
-    "test": "jest"
+    "test": "jest -u"
   },
   "repository": {
     "type": "git",
