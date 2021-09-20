@@ -17,21 +17,28 @@ import PropTypes from "prop-types";
 import {useDispatch} from "react-redux";
 import {resetAllGames} from "../../store/GameState/actions";
 import {Stack} from "@mui/material";
+import {useStyles} from "./styles";
 
 export default function Players({handleNewGame}) {
   const [name, setName] = useState("")
-  const [players, setPlayers] = useState(["default"]);
-  const [error, setError] = useState(false);
+  const [players, setPlayers] = useState([]);
+  const [error, setError] = useState("");
   const dispatch = useDispatch();
+  const classes = useStyles();
 
   function addPlayer(event, newPlayer) {
     event.preventDefault();
-    if (players.indexOf(newPlayer) === -1) {
-      setPlayers((players) => [...players, newPlayer]);
-      setError(false);
-      setName("");
+
+    if (newPlayer.trim().length > 30) {
+      setError("Name of the player too long");
     } else {
-      setError(true);
+      if (players.indexOf(newPlayer) === -1 && newPlayer.trim().length > 0) {
+        setPlayers((players) => [...players, newPlayer]);
+        setError("");
+        setName("");
+      } else {
+        setError("Player with this name already exist");
+      }
     }
   }
 
@@ -58,14 +65,15 @@ export default function Players({handleNewGame}) {
       <Stack mt={6} pl={2}>
         <form onSubmit={(event) => addPlayer(event, name)}>
           <InputLabel htmlFor="name-input">Name</InputLabel>
-          <TextField id="name-input" aria-describedby="name-input-text" error={error} value={name}
+          <TextField id="name-input" aria-describedby="name-input-text" error={!!error} value={name}
                      variant="outlined" size="small"
                      onChange={(event) => setName(event.target.value)}/>
-          <FormHelperText id="my-helper-text">{error
-                                               ? 'Player with this name already exist'
-                                               : 'Please enter name of the player.'}</FormHelperText>
+          <FormHelperText id="name-input-helper-text">{error === ""
+                                                       ? "Please enter name of the player"
+                                                       : error}</FormHelperText>
 
-          <Button type="submit" disabled={name.length === 0} size="small" variant="outlined">Add a player</Button>
+          <Button type="submit" disabled={name.length === 0} size="small" variant="outlined"
+                  className={classes.addPlayerButton}>Add a player</Button>
         </form>
         {players.length > 0 && (
           <Stack mt={4}>
@@ -74,7 +82,7 @@ export default function Players({handleNewGame}) {
                 <TableHead>
                   <TableRow>
                     <TableCell>#</TableCell>
-                    <TableCell align="center">Name</TableCell>
+                    <TableCell align="left" className={classes.playerNameCell}>Name</TableCell>
                     <TableCell align="center">Won Games</TableCell>
                     <TableCell align="center">Total Score</TableCell>
                     <TableCell align="center">Action</TableCell>
@@ -89,7 +97,7 @@ export default function Players({handleNewGame}) {
                       <TableCell component="th" scope="row">
                         {index + 1}
                       </TableCell>
-                      <TableCell align="center">{player}</TableCell>
+                      <TableCell align="left">{player}</TableCell>
                       <TableCell align="center">1</TableCell>
                       <TableCell align="center">1</TableCell>
                       <TableCell align="center">
@@ -106,7 +114,7 @@ export default function Players({handleNewGame}) {
         {players.length > 0 && (
           <Stack mt={4}>
             <ButtonGroup>
-              <Button onClick={startNewGameClicked} color="info">Start a new game</Button>
+              <Button onClick={startNewGameClicked} color="default">Start a new game</Button>
               <Button onClick={resetAllGamesClicked} color="secondary">Reset all games</Button>
             </ButtonGroup>
           </Stack>

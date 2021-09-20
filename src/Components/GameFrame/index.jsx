@@ -5,6 +5,7 @@ import PropTypes from "prop-types";
 import {useDispatch, useSelector} from "react-redux";
 import {updateScores} from "../../store/GameState/actions";
 import {getFrameScore} from "../../store/GameState/selector";
+import {useStyles} from "./styles";
 
 export default function GameFrame({
                                     playerName,
@@ -22,6 +23,7 @@ export default function GameFrame({
   const [spareValue, setSpareValue] = useState(10);
   const totalFrameScore = useSelector(getFrameScore(gameIndex, playerName, frameIndex));
   const dispatch = useDispatch();
+  const classes = useStyles();
 
   function toNumericScore(value) {
     if (value === "X") {
@@ -92,17 +94,13 @@ export default function GameFrame({
 
 
   return (
-    <div style={{
-      "borderRight": "1px solid grey",
-      "borderTop": "1px solid grey",
-      "borderBottom": "1px solid grey"
-    }}>
-      <div style={{"marginLeft": "20px"}}>
+    <div className={classes.frame}>
+      <div className={classes.frameTopRow}>
         {kicks.map((kickValue, index) => {
           return (
-            <Select labelId={"demo-simple-select-label" + index}
+            <Select labelId={"select-kick" + index}
                     key={playerName + "_" + gameIndex + "_" + frameIndex + "_" + index}
-                    id={"demo-simple-select" + index} value={kickValue}
+                    id={"select" + index} value={kickValue}
                     disabled={isDisabledAfterTwo && index > 1 || isDisabled}
                     onChange={(event) => {
                       if (index === 0) {
@@ -119,7 +117,7 @@ export default function GameFrame({
         })}
       </div>
       <div>
-        <Typography variant="body1" align="center" mt={2} mb={1} >{totalFrameScore}</Typography>
+        <Typography variant="body1" align="center" mt={2} mb={1}>{totalFrameScore}</Typography>
       </div>
     </div>
   )
