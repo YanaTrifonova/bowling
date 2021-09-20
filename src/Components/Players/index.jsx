@@ -27,9 +27,7 @@ export default function Players({handleNewGame}) {
 
   const totalScore = useSelector(getTotalScoreAcrossGames(players));
   const wonGames = useSelector(getWonGames(players));
-
-  console.log("wonGames", wonGames);
-
+  
   const dispatch = useDispatch();
   const classes = useStyles();
 
