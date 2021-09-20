@@ -80,8 +80,11 @@ export default function (state = initialState, action) {
         playerCopy,
         frameToUpdate
       } = makeCopyOfState(playerToUpdate);
+
       if (kickIndex === 1 && frameIndexToUpdate !== playerCopy.length || action.payload.score === 10) {
-        playerCopy[frameIndexToUpdate + 1].isDisabled = false;
+        if (playerCopy[frameIndexToUpdate + 1]) {
+          playerCopy[frameIndexToUpdate + 1].isDisabled = false;
+        }
       }
       if (frameIndexToUpdate > 0) {
         playerCopy[frameIndexToUpdate - 1].isDisabled = true;
