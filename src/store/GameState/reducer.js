@@ -1,4 +1,4 @@
-import {CREATE_NEW_GAME, RESET_ALL_GAMES, UPDATE_SCORES, UPDATE_SCORES_LAST_FRAME} from "./actions";
+import {CREATE_NEW_GAME, DELETE_GAME, RESET_ALL_GAMES, UPDATE_SCORES} from "./actions";
 
 const initialState = {
   games: []
@@ -34,11 +34,9 @@ export default function (state = initialState, action) {
 
   switch (action.type) {
     case CREATE_NEW_GAME : {
-
-      const game = action.payload.reduce((a, v) =>
-      {
+      const game = action.payload.reduce((a, v) => {
         const gameTable = []
-        for (let i = 0; i < 10; i ++) {
+        for (let i = 0; i < 10; i++) {
           gameTable.push({
             scores: 0,
             totalScores: 0,
@@ -61,6 +59,13 @@ export default function (state = initialState, action) {
 
     case RESET_ALL_GAMES: {
       return initialState;
+    }
+
+    case DELETE_GAME: {
+      return {
+        ...state,
+        games: [...state.games].filter((game, index) => index !== action.payload - 1)
+      }
     }
 
     case UPDATE_SCORES: {
@@ -98,12 +103,15 @@ export default function (state = initialState, action) {
       if (frameIndexToUpdate !== 0 && playerCopy[frameIndexToUpdate - 1].isStrike && kickIndex !== 2) {
         playerCopy[frameIndexToUpdate - 1].totalScores += resultScore;
       }
-      if (frameIndexToUpdate >=2 && playerCopy[frameIndexToUpdate - 1].isStrike && playerCopy[frameIndexToUpdate - 2].isStrike && kickIndex === 0) {
+      if (frameIndexToUpdate >= 2 && playerCopy[frameIndexToUpdate - 1].isStrike && playerCopy[frameIndexToUpdate
+                                                                                               - 2].isStrike
+          && kickIndex === 0) {
         playerCopy[frameIndexToUpdate - 2].totalScores += resultScore;
         playerCopy[frameIndexToUpdate - 1].totalScores += resultScore;
       }
 
-      frameToUpdate.totalScores = frameToUpdate.scores  + (frameIndexToUpdate === 0 ? 0 : playerCopy[frameIndexToUpdate - 1].totalScores);
+      frameToUpdate.totalScores =
+        frameToUpdate.scores + (frameIndexToUpdate === 0 ? 0 : playerCopy[frameIndexToUpdate - 1].totalScores);
 
       return createNewState(gameCopy, playerToUpdate, playerCopy, gameIndexToUpdate);
     }

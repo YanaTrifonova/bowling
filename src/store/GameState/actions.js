@@ -1,6 +1,7 @@
 export const CREATE_NEW_GAME = "CREATE_NEW_GAME";
 export const RESET_ALL_GAMES = "RESET_ALL_GAMES";
-export const UPDATE_SCORES = "UPDATE_SCORES"
+export const DELETE_GAME = "DELETE_GAME";
+export const UPDATE_SCORES = "UPDATE_SCORES";
 
 export function createNewGame(data) {
   return {
@@ -13,6 +14,13 @@ export function resetAllGames() {
   return {
     type: RESET_ALL_GAMES,
     payload: null,
+  }
+}
+
+export function deleteGame(gameIndex) {
+  return {
+    type: DELETE_GAME,
+    payload: gameIndex,
   }
 }
 
