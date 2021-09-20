@@ -14,15 +14,22 @@ import {
   TextField,
 } from '@material-ui/core';
 import PropTypes from "prop-types";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {resetAllGames} from "../../store/GameState/actions";
 import {Stack} from "@mui/material";
 import {useStyles} from "./styles";
+import {getTotalScoreAcrossGames, getWonGames} from "../../store/GameState/selector";
 
 export default function Players({handleNewGame}) {
   const [name, setName] = useState("")
   const [players, setPlayers] = useState([]);
   const [error, setError] = useState("");
+
+  const totalScore = useSelector(getTotalScoreAcrossGames(players));
+  const wonGames = useSelector(getWonGames(players));
+
+  console.log("wonGames", wonGames);
+
   const dispatch = useDispatch();
   const classes = useStyles();
 
@@ -98,8 +105,8 @@ export default function Players({handleNewGame}) {
                         {index + 1}
                       </TableCell>
                       <TableCell align="left">{player}</TableCell>
-                      <TableCell align="center">1</TableCell>
-                      <TableCell align="center">1</TableCell>
+                      <TableCell align="center">{wonGames[player]}</TableCell>
+                      <TableCell align="center">{totalScore[player]}</TableCell>
                       <TableCell align="center">
                         <Button onClick={() => onPlayerDelete(player)} color="secondary"
                                 variant="outlined">Delete</Button>
