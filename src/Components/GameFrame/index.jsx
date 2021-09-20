@@ -53,7 +53,7 @@ export default function GameFrame({
 
     let secondKickPossibleHit = []
     if (value !== "X") {
-      secondKickPossibleHit = initialSecondKickPossibleHit.slice(0, 10 - value);
+      secondKickPossibleHit = initialSecondKickPossibleHit.slice(0, 11 - value);
       const updateSpareValue = secondKickPossibleHit[secondKickPossibleHit.length - 1];
       if (updateSpareValue !== "/") {
         setSpareValue(updateSpareValue);
