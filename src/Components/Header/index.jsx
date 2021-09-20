@@ -1,8 +1,12 @@
 import React from 'react';
-import { Typography } from '@material-ui/core';
+import {Container, Typography} from '@material-ui/core';
+import {Divider} from "@mui/material";
 
 export default function Header() {
   return (
-    <Typography variant="h1" component="div" gutterBottom>🎳 Bowling App</Typography>
+    <Container maxWidth="xl">
+      <Typography variant="h1" component="div" gutterBottom>🎳 Bowling App</Typography>
+      <Divider />
+    </Container>
   );
 }
