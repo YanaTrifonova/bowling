@@ -14,9 +14,13 @@ module.exports = {
     },
   },
   optimization: {
-    removeAvailableModules: false,
-    removeEmptyChunks: false,
-    splitChunks: false,
+    splitChunks: {
+      chunks: 'all',
+    },
+  },
+  performance: {
+    maxEntrypointSize: 512000,
+    maxAssetSize: 512000
   },
   plugins: [
     new HtmlWebpackPlugin({
