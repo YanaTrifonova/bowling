@@ -4,7 +4,7 @@ import reducer, {
   updateCurrentFrame,
   updatePreviousTotalScores
 } from "../../../src/store/GameState/reducer";
-import {createNewGame, deleteGame, resetAllGames} from "../../../src/store/GameState/actions";
+import {createNewGame, deleteGame, resetAllGames, updateScores} from "../../../src/store/GameState/actions";
 
 describe('gameState reducer', () => {
   it('should return the initial state', () => {
@@ -849,6 +849,168 @@ describe('gameState reducer', () => {
 
     expect(reducer(
       initialState, deleteGame(deleteGameIndex))).toEqual(resultAfterDeleteFirstGameState);
+  });
+  it('should update score in state', () => {
+    const initialState = {
+      games: [
+        {
+          player1: [
+            {
+              scores: 10,
+              totalScores: 25,
+              isStrike: true,
+              isSpare: false,
+              isDisabled: true
+            },
+            {
+              scores: 10,
+              totalScores: 42,
+              isStrike: true,
+              isSpare: false,
+              isDisabled: true
+            },
+            {
+              scores: 7,
+              totalScores: 49,
+              isStrike: false,
+              isSpare: false,
+              isDisabled: false
+            },
+            {
+              scores: 0,
+              totalScores: 0,
+              isStrike: false,
+              isSpare: false,
+              isDisabled: true
+            },
+            {
+              scores: 0,
+              totalScores: 0,
+              isStrike: false,
+              isSpare: false,
+              isDisabled: true
+            },
+            {
+              scores: 0,
+              totalScores: 0,
+              isStrike: false,
+              isSpare: false,
+              isDisabled: true
+            },
+            {
+              scores: 0,
+              totalScores: 0,
+              isStrike: false,
+              isSpare: false,
+              isDisabled: true
+            },
+            {
+              scores: 0,
+              totalScores: 0,
+              isStrike: false,
+              isSpare: false,
+              isDisabled: true
+            },
+            {
+              scores: 0,
+              totalScores: 0,
+              isStrike: false,
+              isSpare: false,
+              isDisabled: true
+            },
+            {
+              scores: 0,
+              totalScores: 0,
+              isStrike: false,
+              isSpare: false,
+              isDisabled: true
+            }
+          ],
+        }
+      ]
+    };
+
+    const expectedState = {
+      games: [
+        {
+          player1: [
+            {
+              scores: 10,
+              totalScores: 25,
+              isStrike: true,
+              isSpare: false,
+              isDisabled: true
+            },
+            {
+              scores: 10,
+              totalScores: 43,
+              isStrike: true,
+              isSpare: false,
+              isDisabled: true
+            },
+            {
+              scores: 8,
+              totalScores: 51,
+              isStrike: false,
+              isSpare: false,
+              isDisabled: false
+            },
+            {
+              scores: 0,
+              totalScores: 0,
+              isStrike: false,
+              isSpare: false,
+              isDisabled: false
+            },
+            {
+              scores: 0,
+              totalScores: 0,
+              isStrike: false,
+              isSpare: false,
+              isDisabled: true
+            },
+            {
+              scores: 0,
+              totalScores: 0,
+              isStrike: false,
+              isSpare: false,
+              isDisabled: true
+            },
+            {
+              scores: 0,
+              totalScores: 0,
+              isStrike: false,
+              isSpare: false,
+              isDisabled: true
+            },
+            {
+              scores: 0,
+              totalScores: 0,
+              isStrike: false,
+              isSpare: false,
+              isDisabled: true
+            },
+            {
+              scores: 0,
+              totalScores: 0,
+              isStrike: false,
+              isSpare: false,
+              isDisabled: true
+            },
+            {
+              scores: 0,
+              totalScores: 0,
+              isStrike: false,
+              isSpare: false,
+              isDisabled: true
+            }
+          ],
+        }
+      ]
+    };
+
+    expect(reducer(
+      initialState, updateScores(3, 2, 1, "player1", 2, 1))).toEqual(expectedState);
   });
 })
 
