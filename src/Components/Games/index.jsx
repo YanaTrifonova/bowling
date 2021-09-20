@@ -11,7 +11,7 @@ export default function Games() {
       {games.map((game, index) => {
         const gameNumber = games.length - index;
         return (
-          <Game game={game} gameNumber={gameNumber} key={gameNumber}/>
+          <Game game={game} gameNumber={gameNumber} gameIndex={index + 1} key={gameNumber}/>
         )
       })}
     </>
