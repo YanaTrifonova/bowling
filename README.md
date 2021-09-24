@@ -4,7 +4,7 @@
 
 ## Live
 
-###[Link](https://10-pin-bowling.netlify.app/)
+### [🎳 Link [press me]](https://10-pin-bowling.netlify.app/)
 
 ## Rules of play
 
