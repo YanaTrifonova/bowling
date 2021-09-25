@@ -5,6 +5,7 @@ import reducer, {
   updatePreviousTotalScores
 } from "../../../src/store/GameState/reducer";
 import {createNewGame, deleteGame, resetAllGames, updateScores} from "../../../src/store/GameState/actions";
+import {getAllGames, getFrameScore} from "../../../src/store/GameState/selector";
 
 describe('gameState reducer', () => {
   it('should return the initial state', () => {
@@ -1246,5 +1247,39 @@ describe('support methods in reducer: ', () => {
 
     updatePreviousTotalScores(previousFrame, previousPreviousFrame, 0, 10);
     expect(previousFrame).toEqual(expectedFrame);
+  });
+
+  it('selector', () => {
+    const state = {games: ["i"]};
+    const selected = getAllGames(state);
+    expect(selected).toEqual(["i"]);
+  });
+
+  it('selector-2', () => {
+    const game = ["player"].reduce((a, v) => {
+      const gameTable = []
+      for (let i = 0; i < 10; i++) {
+        gameTable.push({
+          scores: 0,
+          totalScores: 0,
+          isStrike: false,
+          isSpare: false,
+          isDisabled: i !== 0,
+        })
+      }
+      return ({
+        ...a,
+        [v]: gameTable
+      })
+    }, {});
+
+    let state = {
+      games: [game]
+    }
+
+    state.games[0]["player"][0].totalScores = 3;
+
+    const selected = getFrameScore(1, "player", 0)(state);
+    expect(selected).toEqual(3);
   });
 })
